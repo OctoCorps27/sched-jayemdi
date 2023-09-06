@@ -1,0 +1,130 @@
+body{
+    background:#eeeeeed8;
+    padding:75px;
+    text-align:center;
+    font-family: 'Oswald', sans-serif;
+    
+  
+    
+          
+  }
+  
+  h1{
+    color:#c0c0c0;
+    font-weight:100;
+    text-align: left;
+  }
+  
+  .btn{
+    color:rgb(0, 0, 0);
+    background:#8aee81;
+    padding:10px 20px;
+    font-size:12px;
+    text-decoration:none;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    transition:all 0.3s ease;
+  }
+  
+  .btn:hover{
+    border:none;
+    background:rgba(0, 0, 0, 0.4);
+    background:rgb(1, 102, 31);
+    padding:20px 20px;
+   
+  }
+  
+  .footer{
+    font-size:8px;
+    color:#fff;
+    clear:both;
+    display:block;
+    letter-spacing:5px;
+    border:1px solid #fff;
+    padding:5px;
+    text-decoration:none;
+    width:210px;
+    margin:auto;
+    margin-top:400px;
+  }
+
+  .schedule{
+      margin-top: 5%;
+      border: 10px inset;
+      margin-left: 5%;
+
+  }
+
+  .logo{
+      padding-top: 5%;
+   
+  }
+
+
+
+
+
+
+/* Schedule Table*/
+
+  table.darkTable {
+    font-family: "Arial Black", Gadget, sans-serif;
+    border: 2px solid #000000;
+    background-color: #8aee81;
+    width: 100%;
+    height: 200px;
+    text-align: center;
+    border-collapse: collapse;
+    transition:all 0.5s ease;
+    font-family: 'Oswald', sans-serif;
+  }
+  table.darkTable td, table.darkTable th {
+    border: 1px solid #4A4A4A;
+    padding: 3px 2px;
+    transition:all 0.5s ease;
+  }
+  table.darkTable tbody td {
+    font-size: 13px;
+    color: #000000;
+    transition:all 0.5s ease;
+  }
+  table.darkTable tr:nth-child(even) {
+    background: #8aee81;
+    transition:all 0.5s ease;
+  }
+  table.darkTable thead {
+    background: #8aee81;
+    border-bottom: 3px solid #000000;
+    transition:all 0.5s ease;
+  }
+  table.darkTable thead th {
+    font-size: 15px;
+    font-weight: bold;
+    color: #000000;
+    text-align: center;
+    border-left: 2px solid #4A4A4A;
+    transition:all 0.5s ease;
+  }
+  table.darkTable thead th:first-child {
+    border-left: none;
+    transition:all 0.5s ease;
+  }
+  
+  table.darkTable tfoot {
+    font-size: 12px;
+    font-weight: bold;
+    color: #E6E6E6;
+    background: #8aee81;
+    background: -moz-linear-gradient(top, #404040 0%, #191919 66%, #000000 100%);
+    background: -webkit-linear-gradient(top, #404040 0%, #191919 66%, #000000 100%);
+    background: linear-gradient(to bottom, #404040 0%, #191919 66%, #000000 100%);
+    border-top: 1px solid #4A4A4A;
+    transition:all 0.5s ease;
+  }
+  table.darkTable tfoot td {
+    font-size: 12px;
+    transition:all 0.5s ease;
+  }
+
+
+
