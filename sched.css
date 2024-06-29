@@ -58,3 +58,13 @@ header {
       transform: translateY(0);
   }
 }
+
+/* Media query for iPhone 13 in portrait mode */
+@media only screen and (max-width: 1170px) {
+  /* Adjust styles as needed */
+}
+
+/* Media query for iPhone 13 in landscape mode */
+@media only screen and (min-width: 1171px) and (max-width: 2532px) {
+  /* Adjust styles as needed */
+}
