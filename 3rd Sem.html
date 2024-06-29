@@ -1,109 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- 
-    <link rel="stylesheet" href="sched.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
     <link href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="sched.css">
     <title>My Class Schedule</title>
     <link rel="shortcut icon" href="De_La_Salle_University_Seal.svg.png" />
-
 </head>
 <body>
-
-    <div id="loading-screen">
-        <div id="loading-icon"></div>
+    <div id="loading-screen" class="ui active dimmer">
+        <div class="ui text loader">Loading</div>
     </div>
 
-    <a href="index.html" class="btn">Home</a>
-    <a href="1st Sem.html" class="btn">1st Sem</a>
-    <a href="2nd Sem.html" class="btn">2nd Sem</a>
-    <a href="3rd Sem.html" class="btn">3rd Sem</a>
-    <a href="Class Links.html" class="btn"> Class Links</a>
-    <a href="https://dlsu.instructure.com/" target="_blank" class="btn">Canvas</a>
-    <a href="https://enroll.dlsu.edu.ph/dlsu/proceed_to_main_page?px=GBwZGZoZGpyXGpqamBgYGBgY" target="_blank" class="btn">School Portal</a>
-    <a href="https://mail.google.com/mail/u/1/#inbox" target="_blank" class="btn"> School Mail</a>
+    <header>
+        <div class="ui secondary pointing menu green-bg">
+            <div class="left menu">
+                <a href="index.html" class="item"><i class="home icon"></i> Home</a>
+                <a href="1st Sem.html" class="item"><i class="book icon"></i> 1st Sem</a>
+                <a href="2nd Sem.html" class="item"><i class="book icon"></i> 2nd Sem</a>
+                <a href="3rd Sem.html" class="item"><i class="book icon"></i> 3rd Sem</a>
+                <a href="Class Links.html" class="item"><i class="linkify icon"></i> Class Links</a>
+            </div>
+            <div class="right menu">
+                <a href="https://dlsu.instructure.com/" target="_blank" class="item"><i class="graduation cap icon"></i> Canvas</a>
+                <a href="https://enroll.dlsu.edu.ph/dlsu/proceed_to_main_page?px=GBwZGZoZGpyXGpqamBgYGBgY" target="_blank" class="item"><i class="building icon"></i> School Portal</a>
+                <a href="https://mail.google.com/mail/u/1/#inbox" target="_blank" class="item"><i class="mail icon"></i> School Mail</a>
+            </div>
+        </div>
+    </header>
 
-  
-    <br>
-<br>
-<br>
-<br>
-<br> <!--add -->
-<br> <!--add -->
-<br> <!--add -->
-<h1>Jayemdi's Schedule </h1>
-    <table class="darkTable">
-        <thead>
-        <tr>
-        <th>Monday</th>
-        <th>Tuesday</th>
-        <th>Wednesday</th>
-        <th>Thursday</th>
-        <th>Friday</th>
-        <th>Saturday</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr> <!--First Period -->
-        <td>LB BBI20 (Online) 7:30 AM-10:30 AM</td><!--Monday -->
-        <td>GE USELF (Online) 7:30 AM-9:00 AM</td><!--Tuesday -->
-        <td>LB OBIO7 (Online) 9:15 AM-10:45 AM</td><!--Wednesday -->
-        <td>LB BBI20 - N02A ST. JOSEPH HALL SJ605 7:30 AM-10:30 AM</td><!--Thursday -->
-        <td>GE USELF (Online) 7:30 AM-9:00 AM</td><!--Friday -->
-        <td>LB OBIO7 (Online) 7:30 AM-9:00 AM</td><!--Saturday -->
-        </tr>
-        <tr> <!--Second Period -->
-        <td>LBB OBI22 (Online) 2:30 PM- 5:30 PM</td><!--Monday -->
-        <td>LC ASEAN - Z26 Lecture (Online) 9:15 AM- 10:45 AM </td><!--Tuesday -->
-        <td></td><!--Wednesday -->
-        <td>HI STOLO - N05 12:45 PM- 1:45 PM QUE T. YUCHENGCO HALL EY509</td><!--Thursday -->
-        <td>LC ASEAN - Z31 Lecture (Online) 9:15 AM- 10:45 AM</td><!--Friday -->
-        <td></td><!--Saturday -->
-        </tr>
-        <tr><!--Third Period -->
-        <td></td><!--Monday -->
-        <td>EP IDEMI - N01 Lecture (Online) 11:00 AM - 12:30 PM</td><!--Tuesday -->
-        <td></td><!--Wednesday -->
-        <td>LB OBI22 -NO1A Lecture (Online) 2:30 PM - 5:30 PM</td><!--Thursday -->
-        <td>EP IDEMI - NO1 Lecture (Online) 11:00 AM - 12:30 PM</td><!--Friday -->
-        <td></td><!--Saturday -->
-        </tr>
-        <tr><!--Fourth Period -->
-            <td></td><!--Monday -->
-            <td>MD MICRO - N05 Lecture (Online) 2:30 PM - 4:00 PM</td><!--Tuesday -->
-            <td></td><!--Wednesday -->
-            <td></td><!--Thursday -->
-            <td>MD MICRO - N05 Lecture 2:30 PM - 4:00 PM DON ENRIGQUE T. YUCHENGCO HALL EY509</td><!--Friday -->
-            <td></td><!--Saturday -->
-            </tr>
-        
+    <main class="main-content">
+        <h1>Jayemdi's Schedule</h1>
 
-    
-       
-        
-        </tbody>
+        <table class="ui celled table">
+            <thead>
+                <tr>
+                    <th>Time/Day</th>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>7:30 AM - 10:30 AM</td>
+                    <td>LBBBI20 (Online)</td><!--Monday -->
+                    <td>GE USELF (Online)</td><!--Tuesday -->
+                    <td>LB OBIO7 (Online)</td><!--Wednesday -->
+                    <td>LB BBI20 - N02A ST. JOSEPH HALL SJ605</td><!--Thursday -->
+                    <td>GE USELF (Online)</td><!--Friday -->
+                    <td>LB OBIO7 (Online)</td><!--Saturday -->
+                </tr>
+                <tr>
+                    <td>9:15 AM - 10: 30 AM</td>
+                    <td></td><!--Monday -->
+                    <td></td><!--Tuesday -->
+                    <td></td><!--Wednesday -->
+                    <td></td><!--Thursday -->
+                    <td></td><!--Friday -->
+                    <td></td><!--Saturday -->
+                </tr>
+                <tr>
+                    <td>2:30 PM - 5:30 PM</td>
+                    <td>LBB OBI22 (Online)</td><!--Monday -->
+                    <td>LC ASEAN - Z26 Lecture (Online)</td><!--Tuesday -->
+                    <td></td><!--Wednesday -->
+                    <td>HI STOLO - N05 QUE T. YUCHENGCO HALL EY509</td><!--Thursday -->
+                    <td>LC ASEAN - Z31 Lecture (Online)</td><!--Friday -->
+                    <td></td><!--Saturday -->
+                </tr>
+                <tr>
+                    <td>11:00 AM - 12:30 PM</td>
+                    <td></td><!--Monday -->
+                    <td>EP IDEMI - N01 Lecture (Online)</td><!--Tuesday -->
+                    <td></td><!--Wednesday -->
+                    <td>LB OBI22 - NO1A Lecture (Online)</td><!--Thursday -->
+                    <td>EP IDEMI - NO1 Lecture (Online)</td><!--Friday -->
+                    <td></td><!--Saturday -->
+                </tr>
+                <tr>
+                    <td>2:30 PM - 4:00 PM</td>
+                    <td></td><!--Monday -->
+                    <td>MD MICRO - N05 Lecture (Online)</td><!--Tuesday -->
+                    <td></td><!--Wednesday -->
+                    <td></td><!--Thursday -->
+                    <td>MD MICRO - N05 Lecture DON ENRIGQUE T. YUCHENGCO HALL EY509</td><!--Friday -->
+                    <td></td><!--Saturday -->
+                </tr>
+            </tbody>
         </table>
+    </main>
 
-        <br>
-        <br>
+    <script>
+        window.addEventListener('load', function () {
+            document.getElementById('loading-screen').classList.remove('active');
+        });
 
-       
+        var links = document.querySelectorAll('.ui.secondary.pointing.menu .item');
+        links.forEach(function (link) {
+            link.addEventListener('click', function () {
+                document.getElementById('loading-screen').classList.add('active');
+            });
+        });
+    </script>
 
 </body>
-
-
-<script>
-    // Hide the loading screen when the page is fully loaded
-    window.addEventListener('load', function () {
-        document.getElementById('loading-screen').style.display = 'none';
-    });
-
-    // Show the loading screen when a link is clicked
-    var links = document.querySelectorAll('a.btn');
-    links.forEach(function (link) {
-        link.addEventListener('click', function () {
-            document.getElementById('loading-screen').style.display = 'flex';
-        });
-    });
-</script>
 </html>

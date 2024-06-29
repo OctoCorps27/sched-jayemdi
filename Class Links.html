@@ -1,45 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <link rel="stylesheet" href="sched.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
     <link href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="sched.css"> <!-- Link to your external CSS file -->
     <title>My Class Schedule</title>
     <link rel="shortcut icon" href="De_La_Salle_University_Seal.svg.png" />
-
 </head>
-
 <body>
-    <div id="loading-screen">
-        <div id="loading-icon"></div>
+    <div id="loading-screen" class="ui active dimmer">
+        <div class="ui text loader">Loading</div>
     </div>
 
+    <header>
+        <div class="ui secondary pointing menu">
+            <div class="left menu">
+                <a href="index.html" class="item"><i class="home icon"></i> Home</a>
+                <a href="1st Sem.html" class="item"><i class="book icon"></i> 1st Sem</a>
+                <a href="2nd Sem.html" class="item"><i class="book icon"></i> 2nd Sem</a>
+                <a href="3rd Sem.html" class="item"><i class="book icon"></i> 3rd Sem</a>
+                <a href="Class Links.html" class="item"><i class="linkify icon"></i> Class Links</a>
+            </div>
+            <div class="right menu">
+                <a href="https://dlsu.instructure.com/" target="_blank" class="item"><i class="graduation cap icon"></i> Canvas</a>
+                <a href="https://enroll.dlsu.edu.ph/dlsu/proceed_to_main_page?px=GBwZGZoZGpyXGpqamBgYGBgY" target="_blank" class="item"><i class="building icon"></i> School Portal</a>
+                <a href="https://mail.google.com/mail/u/1/#inbox" target="_blank" class="item"><i class="mail icon"></i> School Mail</a>
+            </div>
+        </div>
+    </header>
 
-    <a href="index.html" class="btn">Home</a>
-    <a href="1st Sem.html" class="btn">1st Sem</a>
-    <a href="2nd Sem.html" class="btn">2nd Sem</a>
-    <a href="3rd Sem.html" class="btn">3rd Sem</a>
-    <a href="Class Links.html" class="btn"> Class Links</a>
-    <a href="https://dlsu.instructure.com/" target="_blank" class="btn">Canvas</a>
-    <a href="https://enroll.dlsu.edu.ph/dlsu/proceed_to_main_page?px=GBwZGZoZGpyXGpqamBgYGBgY" target="_blank"
-        class="btn">School Portal</a>
-    <a href="https://mail.google.com/mail/u/1/#inbox" target="_blank" class="btn"> School Mail</a>
-</body>
+    <main class="main-content">
+        <h1>Class Links</h1>
+        <p>No links available</p>
+    </main>
 
-<script>
-    
-    window.addEventListener('load', function () {
-        document.getElementById('loading-screen').style.display = 'none';
-    });
-
-    
-    var links = document.querySelectorAll('a.btn');
-    links.forEach(function (link) {
-        link.addEventListener('click', function () {
-            document.getElementById('loading-screen').style.display = 'flex';
+    <script>
+        window.addEventListener('load', function () {
+            document.getElementById('loading-screen').classList.remove('active');
         });
-    });
-</script>
 
+        var links = document.querySelectorAll('.ui.secondary.pointing.menu .item');
+        links.forEach(function (link) {
+            link.addEventListener('click', function () {
+                document.getElementById('loading-screen').classList.add('active');
+            });
+        });
+    </script>
+
+</body>
 </html>
