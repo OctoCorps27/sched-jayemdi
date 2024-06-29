@@ -6,10 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
     <link href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="sched.css"> <!-- Link to your external CSS file -->
+    <link rel="stylesheet" href="sched.css">
     <title>My Class Schedule</title>
     <link rel="shortcut icon" href="De_La_Salle_University_Seal.svg.png" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <style>
+        .warning {
+            background-color: #f2711c;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1000;
+            display: none; /* Initially hide the warning */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+        }
+
+        .close-btn {
+            cursor: pointer;
+            position: absolute;
+            bottom:10px;
+            right: 1px;
+            color: white;
+            font-size: 40px; /* Increase the close mark size */
+        }
+    </style>
 </head>
 
 <body>
@@ -27,12 +52,9 @@
                 <a href="Class Links.html" class="item"><i class="linkify icon"></i> Class Links</a>
             </div>
             <div class="right menu">
-                <a href="https://dlsu.instructure.com/" target="_blank" class="item"><i class="graduation cap icon"></i>
-                    Canvas</a>
-                <a href="https://enroll.dlsu.edu.ph/dlsu/proceed_to_main_page?px=GBwZGZoZGpyXGpqamBgYGBgY"
-                    target="_blank" class="item"><i class="building icon"></i> School Portal</a>
-                <a href="https://mail.google.com/mail/u/1/#inbox" target="_blank" class="item"><i class="mail icon"></i>
-                    School Mail</a>
+                <a href="https://dlsu.instructure.com/" target="_blank" class="item"><i class="graduation cap icon"></i> Canvas</a>
+                <a href="https://enroll.dlsu.edu.ph/dlsu/proceed_to_main_page?px=GBwZGZoZGpyXGpqamBgYGBgY" target="_blank" class="item"><i class="building icon"></i> School Portal</a>
+                <a href="https://mail.google.com/mail/u/1/#inbox" target="_blank" class="item"><i class="mail icon"></i> School Mail</a>
             </div>
         </div>
     </header>
@@ -45,15 +67,27 @@
         </div>
     </main>
 
+    <!-- Warning Popup -->
+    <div id="warningPopup" class="warning">
+        <span class="close-btn" onclick="closeWarning()">×</span>
+        <strong>FYI:</strong> This interface is not optimized for mobile phones and some tablets. Please view on a desktop for the best experience.
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 
-
     <script>
         window.addEventListener('load', function () {
             document.getElementById('loading-screen').classList.remove('active');
+            // Show warning popup after a delay (e.g., 5 seconds)
+            setTimeout(function () {
+                document.getElementById('warningPopup').style.display = 'block';
+            }, 5000); // Adjust delay time as needed
         });
+
+        function closeWarning() {
+            document.getElementById('warningPopup').style.display = 'none';
+        }
 
         var links = document.querySelectorAll('.ui.secondary.pointing.menu .item');
         links.forEach(function (link) {
@@ -62,8 +96,6 @@
             });
         });
     </script>
-
-
 </body>
 
 </html>
