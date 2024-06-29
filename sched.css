@@ -1,0 +1,116 @@
+body {
+  background: #eeeeeed8;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Oswald', sans-serif;
+}
+
+h1 {
+  color: #c0c0c0;
+  font-weight: 100;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.btn {
+  color: rgb(0, 0, 0);
+  background: #8aee81;
+  padding: 10px 20px;
+  font-size: 12px;
+  text-decoration: none;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.5s ease;
+  display: inline-block;
+  margin: 5px;
+}
+
+.btn:hover {
+  background: rgba(10, 131, 56, 0.904);
+  padding: 10px 20px;
+}
+
+.footer {
+  font-size: 8px;
+  color: #fff;
+  clear: both;
+  display: block;
+  letter-spacing: 3px;
+  border: 1px solid #fff;
+  padding: 5px;
+  text-decoration: none;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.schedule {
+  margin-top: 20px;
+  border: 10px inset;
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+
+.logo {
+  width: 80%;
+  max-width: 500px;
+  display: block;
+  margin: auto;
+  margin-top: 100px;
+}
+
+table.darkTable {
+  font-family: "Arial Black", Gadget, sans-serif;
+  border: 2px solid #000000;
+  background-color: #8aee81;
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  font-family: 'Oswald', sans-serif;
+}
+
+table.darkTable td,
+table.darkTable th {
+  border: 1px solid #4A4A4A;
+  padding: 5px;
+}
+
+table.darkTable tbody td {
+  font-size: 12px;
+}
+
+table.darkTable thead th {
+  font-size: 14px;
+}
+
+#loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+#loading-icon {
+  border: 6px solid #f3f3f3;
+  border-top: 6px solid green;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
