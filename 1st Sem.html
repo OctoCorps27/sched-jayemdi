@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
     <link href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="sched.css"> 
-    <title>My Class Schedule</title>
+    <title>1st Sem Schedule</title>
     <link rel="shortcut icon" href="De_La_Salle_University_Seal.svg.png" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
@@ -35,7 +35,7 @@
     </header>
 
     <main class="main-content">
-        <h1>Ming's Schedule 1st Sem</h1>
+        <h1>1st Sem Schedule</h1>
 
         <!-- Input form to add/edit schedule -->
         <div class="ui form">
@@ -116,13 +116,13 @@
             var time = document.getElementById('time').value;
 
             if (subject && day && time) {
-                var scheduleData = JSON.parse(localStorage.getItem('scheduleData')) || {};
+                var scheduleData = JSON.parse(localStorage.getItem('scheduleData1stSem')) || {};
                 if (!scheduleData[time]) {
                     scheduleData[time] = { Monday: '', Tuesday: '', Wednesday: '', Thursday: '', Friday: '', Saturday: '' };
                 }
                 scheduleData[time][day] = subject;
 
-                localStorage.setItem('scheduleData', JSON.stringify(scheduleData));
+                localStorage.setItem('scheduleData1stSem', JSON.stringify(scheduleData));
                 updateTable(scheduleData);
             } else {
                 showAlert("Please fill in all fields.");
@@ -130,7 +130,7 @@
         }
 
         function loadSchedule() {
-            var scheduleData = JSON.parse(localStorage.getItem('scheduleData')) || {};
+            var scheduleData = JSON.parse(localStorage.getItem('scheduleData1stSem')) || {};
             updateTable(scheduleData);
         }
 
@@ -138,7 +138,12 @@
             var tbody = document.getElementById('schedule-body');
             tbody.innerHTML = '';
 
-            for (var time in data) {
+            // Convert the object to an array and sort by time
+            var sortedTimes = Object.keys(data).sort((a, b) => {
+                return compareTimes(a, b);
+            });
+
+            for (var time of sortedTimes) {
                 var row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${time}</td>
@@ -160,7 +165,7 @@
         }
 
         function deleteSubject(time, day) {
-            var scheduleData = JSON.parse(localStorage.getItem('scheduleData')) || {};
+            var scheduleData = JSON.parse(localStorage.getItem('scheduleData1stSem')) || {};
             if (scheduleData[time]) {
                 scheduleData[time][day] = ''; // Remove the subject for the specific day
                 
@@ -171,7 +176,7 @@
                     delete scheduleData[time];
                 }
 
-                localStorage.setItem('scheduleData', JSON.stringify(scheduleData));
+                localStorage.setItem('scheduleData1stSem', JSON.stringify(scheduleData));
                 updateTable(scheduleData);
             }
         }
@@ -184,6 +189,21 @@
         function showAlert(message) {
             document.getElementById('alert-message').textContent = message;
             $('#alert-modal').modal('show');
+        }
+
+        function compareTimes(a, b) {
+            var parseTime = (time) => {
+                // Example time: "7:30 AM"
+                var [timeStr, period] = time.split(' ');
+                var [hours, minutes] = timeStr.split(':').map(Number);
+
+                if (period === 'PM' && hours !== 12) hours += 12;
+                if (period === 'AM' && hours === 12) hours = 0;
+
+                return hours * 60 + minutes; // Convert to minutes for comparison
+            };
+
+            return parseTime(a) - parseTime(b);
         }
     </script>
 
