@@ -6,19 +6,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
     <link href='https://fonts.googleapis.com/css?family=Oswald:300' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="sched.css">
-    <title>My Class Schedule</title>
+    <link rel="stylesheet" href="sched.css"> 
+    <title>My Class Schedule - 2nd Sem</title>
     <link rel="shortcut icon" href="De_La_Salle_University_Seal.svg.png" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png">
 </head>
 
 <body>
     <div id="loading-screen" class="ui active dimmer">
-        <div class="ui text loader">Loading</div>
+        <div class="ui text loader">Loading...</div>
     </div>
 
     <header>
-        <div class="ui secondary pointing menu green-bg">
+        <div class="ui secondary pointing menu">
             <div class="left menu">
                 <a href="index.html" class="item"><i class="home icon"></i> Home</a>
                 <a href="1st Sem.html" class="item"><i class="book icon"></i> 1st Sem</a>
@@ -27,20 +27,43 @@
                 <a href="https://calendar.google.com/calendar/u/0/r/customweek/2024/7/30?tab=rc" target="_blank" class="item"><i class="calendar icon"></i> Calendar</a>
             </div>
             <div class="right menu">
-                <a href="https://dlsu.instructure.com/" target="_blank" class="item"><i class="graduation cap icon"></i>
-                    Canvas</a>
-                <a href="https://enroll.dlsu.edu.ph/dlsu/proceed_to_main_page?px=GBwZGZoZGpyXGpqamBgYGBgY"
-                    target="_blank" class="item"><i class="building icon"></i> School Portal</a>
-                <a href="https://mail.google.com/mail/u/1/#inbox" target="_blank" class="item"><i class="mail icon"></i>
-                    School Mail</a>
+                <a href="https://dlsu.instructure.com/" target="_blank" class="item"><i class="graduation cap icon"></i> Canvas</a>
+                <a href="https://enroll.dlsu.edu.ph/dlsu/proceed_to_main_page?px=GBwZGZoZGpyXGpqamBgYGBgY" target="_blank" class="item"><i class="building icon"></i> School Portal</a>
+                <a href="https://mail.google.com/mail/u/1/#inbox" target="_blank" class="item"><i class="mail icon"></i> School Mail</a>
             </div>
         </div>
     </header>
 
     <main class="main-content">
-        <h1>Ming's Schedule</h1>
-        <p>No Schedule yet</p>
-        <!-- 
+        <h1>Ming's Schedule 2nd Sem</h1>
+
+        <!-- Input form to add/edit schedule -->
+        <div class="ui form">
+            <div class="fields">
+                <div class="field">
+                    <label>Subject</label>
+                    <input type="text" id="subject" placeholder="Subject">
+                </div>
+                <div class="field">
+                    <label>Day</label>
+                    <select id="day" class="ui dropdown">
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Time</label>
+                    <input type="text" id="time" placeholder="7:30 AM - 9:00 AM">
+                </div>
+            </div>
+            <button class="ui button" onclick="addSchedule()">Add Subject</button>
+            <button class="ui red button" onclick="toggleDeleteButtons()">Toggle Delete Buttons</button>
+        </div>
+
         <table class="ui celled table">
             <thead>
                 <tr>
@@ -53,22 +76,115 @@
                     <th>Saturday</th>
                 </tr>
             </thead>
-           
+            <tbody id="schedule-body">
+                <!-- Rows will be put here -->
+            </tbody>
         </table>
-        -->
-    </main>
 
+        <!-- For Alert -->
+        <div id="alert-modal" class="ui basic modal">
+            <div class="ui icon header">
+                <i class="exclamation triangle icon"></i>
+                Alert
+            </div>
+            <div class="content">
+                <p id="alert-message">Please fill in all fields.</p>
+            </div>
+            <div class="actions">
+                <div class="ui red basic cancel inverted button">
+                    <i class="remove icon"></i>
+                    Close
+                </div>
+            </div>
+        </div>
+    </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 
-
     <script>
+        var showDeleteButtons = false;
+
         window.addEventListener('load', function () {
             document.getElementById('loading-screen').classList.remove('active');
+            loadSchedule(); 
         });
 
-       
+        function addSchedule() {
+            var subject = document.getElementById('subject').value;
+            var day = document.getElementById('day').value;
+            var time = document.getElementById('time').value;
+
+            if (subject && day && time) {
+                var scheduleData = JSON.parse(localStorage.getItem('scheduleData2ndSem')) || {};
+                if (!scheduleData[time]) {
+                    scheduleData[time] = { Monday: '', Tuesday: '', Wednesday: '', Thursday: '', Friday: '', Saturday: '' };
+                }
+                scheduleData[time][day] = subject;
+
+                localStorage.setItem('scheduleData2ndSem', JSON.stringify(scheduleData));
+                updateTable(scheduleData);
+            } else {
+                showAlert("Please fill in all fields.");
+            }
+        }
+
+        function loadSchedule() {
+            var scheduleData = JSON.parse(localStorage.getItem('scheduleData2ndSem')) || {};
+            updateTable(scheduleData);
+        }
+
+        function updateTable(data) {
+            var tbody = document.getElementById('schedule-body');
+            tbody.innerHTML = '';
+
+            for (var time in data) {
+                var row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${time}</td>
+                    <td>${createSubjectCell(data[time].Monday, time, 'Monday')}</td>
+                    <td>${createSubjectCell(data[time].Tuesday, time, 'Tuesday')}</td>
+                    <td>${createSubjectCell(data[time].Wednesday, time, 'Wednesday')}</td>
+                    <td>${createSubjectCell(data[time].Thursday, time, 'Thursday')}</td>
+                    <td>${createSubjectCell(data[time].Friday, time, 'Friday')}</td>
+                    <td>${createSubjectCell(data[time].Saturday, time, 'Saturday')}</td>
+                `;
+                tbody.appendChild(row);
+            }
+        }
+
+        function createSubjectCell(subject, time, day) {
+            return `
+                ${subject ? `${subject} ${showDeleteButtons ? `<button class="delete-button" onclick="deleteSubject('${time}', '${day}')">x</button>` : ''}` : ''}
+            `;
+        }
+
+        function deleteSubject(time, day) {
+            var scheduleData = JSON.parse(localStorage.getItem('scheduleData2ndSem')) || {};
+            if (scheduleData[time]) {
+                scheduleData[time][day] = ''; // Remove the subject for the specific day
+                
+                // Check if all subjects are empty for this time slot
+                var allEmpty = Object.values(scheduleData[time]).every(subject => subject === '');
+                
+                if (allEmpty) {
+                    delete scheduleData[time];
+                }
+
+                localStorage.setItem('scheduleData2ndSem', JSON.stringify(scheduleData));
+                updateTable(scheduleData);
+            }
+        }
+
+        function toggleDeleteButtons() {
+            showDeleteButtons = !showDeleteButtons;
+            loadSchedule(); 
+        }
+
+        function showAlert(message) {
+            document.getElementById('alert-message').textContent = message;
+            $('#alert-modal').modal('show');
+        }
     </script>
 
 </body>

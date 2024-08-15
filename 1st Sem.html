@@ -27,18 +27,15 @@
                 <a href="https://calendar.google.com/calendar/u/0/r/customweek/2024/7/30?tab=rc" target="_blank" class="item"><i class="calendar icon"></i> Calendar</a>
             </div>
             <div class="right menu">
-                <a href="https://dlsu.instructure.com/" target="_blank" class="item"><i class="graduation cap icon"></i>
-                    Canvas</a>
-                <a href="https://enroll.dlsu.edu.ph/dlsu/proceed_to_main_page?px=GBwZGZoZGpyXGpqamBgYGBgY"
-                    target="_blank" class="item"><i class="building icon"></i> School Portal</a>
-                <a href="https://mail.google.com/mail/u/1/#inbox" target="_blank" class="item"><i class="mail icon"></i>
-                    School Mail</a>
+                <a href="https://dlsu.instructure.com/" target="_blank" class="item"><i class="graduation cap icon"></i> Canvas</a>
+                <a href="https://enroll.dlsu.edu.ph/dlsu/proceed_to_main_page?px=GBwZGZoZGpyXGpqamBgYGBgY" target="_blank" class="item"><i class="building icon"></i> School Portal</a>
+                <a href="https://mail.google.com/mail/u/1/#inbox" target="_blank" class="item"><i class="mail icon"></i> School Mail</a>
             </div>
         </div>
     </header>
 
     <main class="main-content">
-        <h1>Ming's Schedule</h1>
+        <h1>Ming's Schedule 1st Sem</h1>
 
         <!-- Input form to add/edit schedule -->
         <div class="ui form">
@@ -64,6 +61,7 @@
                 </div>
             </div>
             <button class="ui button" onclick="addSchedule()">Add Subject</button>
+            <button class="ui red button" onclick="toggleDeleteButtons()">Toggle Delete Buttons</button>
         </div>
 
         <table class="ui celled table">
@@ -79,17 +77,37 @@
                 </tr>
             </thead>
             <tbody id="schedule-body">
-                <!-- Rows will be populated dynamically -->
+                <!-- Rows will be put here -->
             </tbody>
         </table>
+
+        <!-- For Alert -->
+        <div id="alert-modal" class="ui basic modal">
+            <div class="ui icon header">
+                <i class="exclamation triangle icon"></i>
+                Alert
+            </div>
+            <div class="content">
+                <p id="alert-message">Please fill in all fields.</p>
+            </div>
+            <div class="actions">
+                <div class="ui red basic cancel inverted button">
+                    <i class="remove icon"></i>
+                    Close
+                </div>
+            </div>
+        </div>
+    </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 
     <script>
+        var showDeleteButtons = false;
+
         window.addEventListener('load', function () {
             document.getElementById('loading-screen').classList.remove('active');
-            loadSchedule(); // Load schedule data from localStorage on page load
+            loadSchedule(); 
         });
 
         function addSchedule() {
@@ -107,7 +125,7 @@
                 localStorage.setItem('scheduleData', JSON.stringify(scheduleData));
                 updateTable(scheduleData);
             } else {
-                alert("Please fill in all fields.");
+                showAlert("Please fill in all fields.");
             }
         }
 
@@ -124,15 +142,48 @@
                 var row = document.createElement('tr');
                 row.innerHTML = `
                     <td>${time}</td>
-                    <td>${data[time].Monday}</td>
-                    <td>${data[time].Tuesday}</td>
-                    <td>${data[time].Wednesday}</td>
-                    <td>${data[time].Thursday}</td>
-                    <td>${data[time].Friday}</td>
-                    <td>${data[time].Saturday}</td>
+                    <td>${createSubjectCell(data[time].Monday, time, 'Monday')}</td>
+                    <td>${createSubjectCell(data[time].Tuesday, time, 'Tuesday')}</td>
+                    <td>${createSubjectCell(data[time].Wednesday, time, 'Wednesday')}</td>
+                    <td>${createSubjectCell(data[time].Thursday, time, 'Thursday')}</td>
+                    <td>${createSubjectCell(data[time].Friday, time, 'Friday')}</td>
+                    <td>${createSubjectCell(data[time].Saturday, time, 'Saturday')}</td>
                 `;
                 tbody.appendChild(row);
             }
+        }
+
+        function createSubjectCell(subject, time, day) {
+            return `
+                ${subject ? `${subject} ${showDeleteButtons ? `<button class="delete-button" onclick="deleteSubject('${time}', '${day}')">x</button>` : ''}` : ''}
+            `;
+        }
+
+        function deleteSubject(time, day) {
+            var scheduleData = JSON.parse(localStorage.getItem('scheduleData')) || {};
+            if (scheduleData[time]) {
+                scheduleData[time][day] = ''; // Remove the subject for the specific day
+                
+                // Check if all subjects are empty for this time slot
+                var allEmpty = Object.values(scheduleData[time]).every(subject => subject === '');
+                
+                if (allEmpty) {
+                    delete scheduleData[time];
+                }
+
+                localStorage.setItem('scheduleData', JSON.stringify(scheduleData));
+                updateTable(scheduleData);
+            }
+        }
+
+        function toggleDeleteButtons() {
+            showDeleteButtons = !showDeleteButtons;
+            loadSchedule(); 
+        }
+
+        function showAlert(message) {
+            document.getElementById('alert-message').textContent = message;
+            $('#alert-modal').modal('show');
         }
     </script>
 

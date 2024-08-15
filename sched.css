@@ -68,3 +68,17 @@ header {
 @media only screen and (min-width: 1171px) and (max-width: 2532px) {
   /* Adjust styles as needed */
 }
+
+
+.delete-button {
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding: 0;
+  margin-left: 10px;
+}
+.delete-button:hover {
+  text-decoration: underline;
+}
