@@ -39,8 +39,33 @@
 
     <main class="main-content">
         <h1>Ming's Schedule</h1>
-        <p>No Schedule yet</p>
-        <!-- 
+
+        <!-- Input form to add/edit schedule -->
+        <div class="ui form">
+            <div class="fields">
+                <div class="field">
+                    <label>Subject</label>
+                    <input type="text" id="subject" placeholder="Subject">
+                </div>
+                <div class="field">
+                    <label>Day</label>
+                    <select id="day" class="ui dropdown">
+                        <option value="Monday">Monday</option>
+                        <option value="Tuesday">Tuesday</option>
+                        <option value="Wednesday">Wednesday</option>
+                        <option value="Thursday">Thursday</option>
+                        <option value="Friday">Friday</option>
+                        <option value="Saturday">Saturday</option>
+                    </select>
+                </div>
+                <div class="field">
+                    <label>Time</label>
+                    <input type="text" id="time" placeholder="7:30 AM - 9:00 AM">
+                </div>
+            </div>
+            <button class="ui button" onclick="addSchedule()">Add Subject</button>
+        </div>
+
         <table class="ui celled table">
             <thead>
                 <tr>
@@ -53,22 +78,62 @@
                     <th>Saturday</th>
                 </tr>
             </thead>
-           
+            <tbody id="schedule-body">
+                <!-- Rows will be populated dynamically -->
+            </tbody>
         </table>
-        -->
-    </main>
-
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
 
-
     <script>
         window.addEventListener('load', function () {
             document.getElementById('loading-screen').classList.remove('active');
+            loadSchedule(); // Load schedule data from localStorage on page load
         });
 
-     
+        function addSchedule() {
+            var subject = document.getElementById('subject').value;
+            var day = document.getElementById('day').value;
+            var time = document.getElementById('time').value;
+
+            if (subject && day && time) {
+                var scheduleData = JSON.parse(localStorage.getItem('scheduleData')) || {};
+                if (!scheduleData[time]) {
+                    scheduleData[time] = { Monday: '', Tuesday: '', Wednesday: '', Thursday: '', Friday: '', Saturday: '' };
+                }
+                scheduleData[time][day] = subject;
+
+                localStorage.setItem('scheduleData', JSON.stringify(scheduleData));
+                updateTable(scheduleData);
+            } else {
+                alert("Please fill in all fields.");
+            }
+        }
+
+        function loadSchedule() {
+            var scheduleData = JSON.parse(localStorage.getItem('scheduleData')) || {};
+            updateTable(scheduleData);
+        }
+
+        function updateTable(data) {
+            var tbody = document.getElementById('schedule-body');
+            tbody.innerHTML = '';
+
+            for (var time in data) {
+                var row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${time}</td>
+                    <td>${data[time].Monday}</td>
+                    <td>${data[time].Tuesday}</td>
+                    <td>${data[time].Wednesday}</td>
+                    <td>${data[time].Thursday}</td>
+                    <td>${data[time].Friday}</td>
+                    <td>${data[time].Saturday}</td>
+                `;
+                tbody.appendChild(row);
+            }
+        }
     </script>
 
 </body>
